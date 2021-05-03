@@ -1,0 +1,44 @@
+altdns
+ amass
+ bucket_finder
+ CloudFlair
+ commix
+ dirb
+ dirsearch
+ dnsenum
+ dnsrecon
+ dotdotpwn
+ fierce
+ gobuster
+ joomscan
+ Knockpy
+ masscan
+ massdns
+ Nikto
+ Nmap
+ Recon-ng
+ s3recon
+ sqlmap
+ subfinder
+ Sublist3r
+ teh_s3_bucketeers
+ thc-hydra
+ theHarvester
+ tmux
+ virtual-host-discovery
+ wafw00f
+ wfuzz
+ whatweb
+ wpscan
+ XSStrike
+ zsh
+Wordlists
+SecLists
+Tools being added
+ aquatone
+ AWSBucketDump
+ CommonSpeak
+ gitrob
+ Lazys3
+ Sn1per
+ unfurl
