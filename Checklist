@@ -1,0 +1,163 @@
+recon:
+---- content discovery asn---------
+####subnets/ip blocks#####
+1)shodan
+2)bgp.he.net
+3)whois.arin.net
+4)apps.db.ripe.net
+5)reverse.report
+6)dnsgoodies.com
+
+take results run masscan to filter live ip/domains
+run nmap -sV to find outdated services
+webscreenshots for visual recon
+
+####Brand discovery acquisition#######
+1)crunchbase.com/search/acquisition
+trademark google
+facebook.com@2020
+github.com@2020
+
+reverse whois
+viewdns.info
+tools.whoisxmlapi.com
+
+first do whois , take the registrar email, perform reverse whois
+
+----------content discovery----------------
+toplevel domains
+subdomains
+vertical corelations:-
+beta.google
+1)chaos.projectdiscovery.io
+2)sublist3r
+3)amass
+4)aquatone
+5)knockpy
+
+6)subfinder - alpha.beta.google
+
+horizontal coreation
+1)blogger.com
+2)youtube.com
+
+_________________________certificate transparency-------------------
+crt.sh
+google ct
+facebook ct
+
+----------------js enumeration ----------------
+jsparser
+linkfinder
+getjs 
+input scanner - didnt install
+js-scan - didnt install
+
+-----------dns enumeration-----------------
+syborg
+dnsgen
+dnsrecon
+
+
+------------hacks----------
+meg
+tojson - not installed
+interlace -ni
+gf  - ni
+httprobe
+shuffledns - ni
+httpx
+nuclei
+
+
+-------------------subdomain takeovers -------
+canitakeoverxyz
+subover - not installed
+subjack
+takeover
+subzy
+hostilesubbruteforcer
+
+----------------waybackenum-----------------
+waybackurls
+waybackunifier - chronos
+parameth - didnt install
+paramspider
+
+-------------github recon-----------------
+gitrob - didnt install
+githound - didnt trust so didnt install
+sshgit
+trufflehog - need docker
+git-all-secrets - complicated to install
+gitgrabber
+manual dorks
+
+-------------virtual host discovery---------
+webtool - no such tool
+virtual host scanner (vhd)
+
+------------cms identification---------------
+wappalyzer
+builtwith
+netcraft
+whatweb
+retirejs
+-------------waf identification-------------
+wafwoof
+nmap nse scripts
+-----------------port scan--------------
+masscan
+nmap
+naabu
+
+
+
+
+
+
+
+
+
+
+
+1)text injection in url  - https://www.host.com/.htaccess__________hello%20every_one%20currently%20this%20website%20under%20construction%20so%20please%20visit%20https://attacker.com___
+
+2)sybdomain takeover - subzy,aquatone,subjack
+
+4)waybackurls
+5)paramspider
+paramspider -d unifytwin.com --subs false --placeholder '"/><script>confirm(1)</script>' > optimizely.txt | while read host do ; do curl --silent --path-as-is --insecure "$host" | grep -qs "<script>confirm(1)" && echo "$host \033[0;31mVulnerable\n" || echo "$host \033[0;32mNot Vulnerable\n";done
+
+
+
+6) prototype pollution using objects
+
+7)github exposing sensitive data
+8)Dos by setting long passwords
+
+9)jwt forging JWT HS/RSA key confusion vulnerability
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
