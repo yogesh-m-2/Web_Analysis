@@ -135,6 +135,7 @@ paramspider -d unifytwin.com --subs false --placeholder '"/><script>confirm(1)</
 
 7)github exposing sensitive data - trufflehog etc
 8)Dos by setting long passwords
+9)email swapping - eg. send a mail to a victim which is signed by apple
 
 9)jwt forging JWT HS/RSA key confusion vulnerability
 
