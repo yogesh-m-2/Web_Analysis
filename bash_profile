@@ -115,4 +115,23 @@ subzy(){
 ~/go/bin/subzy $1 $2 $3 $4 $5
 }
 
+chronos(){
+~/go/bin/chronos $1 $2 $3 $4 $5
+}
+
+meg(){
+~/go/bin/meg $1 $2 $3 $4 $5
+}
+
+trufflehog(){
+~/go/bin/trufflehog $1 $2 $3 $4 $5
+}
+
+waybackurls(){
+~/go/bin/waybackurls $1 $2 $3 $4 $5
+}
+google(){
+python3 ~/tools/ParamSpider/google.py $1 $2 $3 $4 $5 $6
+}
+
 export PATH=$PATH:/go/bin
