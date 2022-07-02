@@ -28,7 +28,7 @@ def main():
 	if len(sys.argv) < 2:
 		help(1)
 	try:
-		opts, args = getopt.getopt(sys.argv[1:],'d:l:p:o:t:T::u:kv',['search=', 'from=', 'to=', 'v', 'pages=', 't=', 'T=', 'u=', 'k'])
+		opts, args = getopt.getopt(sys.argv[1:],'d:l:p:o:t:T::u:kv',['search=', 'from=', 'to=', 'help', 'pages=', 't=', 'T=', 'u=', 'k'])
 	except Exception as e:
 		print(e)
 
@@ -41,6 +41,10 @@ def main():
 			k_['page_end'] = int(a)
 		if o == '--pages':
 			k_['pages'] = int(a)
+		if o == '--help':
+			help(1)
+		if o == '-help':
+			help(1)
 	if(k_['page_start'] and k_['page_end']):
 		for i in range(k_['page_start'],k_['page_end']+1):
 			page=str((i-1)*10)
