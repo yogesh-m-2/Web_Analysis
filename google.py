@@ -15,9 +15,10 @@ k_ = {
 }
 def help(_exit_=False):
     print("Usage: %s [OPTION]\n" % sys.argv[0])
-    print("\t-search\tsearch string")
-    print("\t-from\tfrom page number to search results")
-    print("\t-t\ttill the page number to search results")
+    print("\t--search\tsearch string")
+    print("\t--from\tfrom page number to search results")
+    print("\t--to\ttill the page number to search results")
+    print("\t--pages\tNumber of pages to get results of")
     if _exit_:
         sys.exit()
 
