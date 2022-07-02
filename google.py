@@ -43,8 +43,6 @@ def main():
 			k_['pages'] = int(a)
 		if o == '--help':
 			help(1)
-		if o == '-help':
-			help(1)
 	if(k_['page_start'] and k_['page_end']):
 		for i in range(k_['page_start'],k_['page_end']+1):
 			page=str((i-1)*10)
