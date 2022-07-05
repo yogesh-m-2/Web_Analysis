@@ -121,7 +121,7 @@ naabu
 
 
 
-1)text injection in url  - https://www.host.com/.htaccess__________hello%20every_one%20currently%20this%20website%20under%20construction%20so%20please%20visit%20https://attacker.com___
+1)text injection in url  - google --search inurl:vimeo --pages 1 | while read host do; do curl --silent https://$host/.htaccess__________hello%20every_one%20currently%20this%20website%20under%20construction%20so%20please%20visit%20https://attacker.com___ | grep -q attacker && \printf "$host \033[0;31mVulnerable\n"; done
 
 2)sybdomain takeover - subzy,aquatone,subjack
 
