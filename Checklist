@@ -127,6 +127,7 @@ censys search 'apache unomi' | jq -r '.[] | .ip'
 
 -)sybdomain takeover - subzy,aquatone,subjack
 -)open redirects
+-)ssrf
 -)broken link hijacking
 -)waybackurls
 -)paramspider
