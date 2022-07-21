@@ -1,1 +1,1 @@
-for host in $(cat domains);do blc https://$host -ro; done|grep --line-buffered BROKEN >> broken_links
+for host in $(cat domains);do blc https://$host -ro |grep BROKEN| awk -v host=$host '{print host, $2, $3}' ;done > broken_links
