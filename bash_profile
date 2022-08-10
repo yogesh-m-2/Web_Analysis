@@ -75,10 +75,6 @@ proburp(){
 sh /home/kali/Downloads/burp/suite/insuite/burp
 }
 
-paramspider(){
-python3 /home/kali/tools/ParamSpider/paramspider.py --domain $1
-}
-
 jsparser(){
 python3 ~tools/JSParser/handler.py
 }
@@ -105,10 +101,10 @@ vhd(){
 ruby ~/tools/virtual-host-discovery/scan.rb $1 $2 $3
 }
 nuclei(){
-~/go/bin/nuclei $1 $2 $#
+~/go/bin/nuclei $1 $2 $3
 }
 paramspider(){
-python3 ~/tools/ParamSpider/paramspider.py $1 $2 $3 $4 $5
+python3 ~/tools/ParamSpider/paramspider.py $1 $2 $3 $4 $5 $6 $7 $8 $9
 }
 
 subzy(){
@@ -131,7 +127,21 @@ waybackurls(){
 ~/go/bin/waybackurls $1 $2 $3 $4 $5
 }
 google(){
-python3 ~/tools/ParamSpider/google.py $1 $2 $3 $4 $5 $6
+python3 ~/tools/google.py $1 $2 $3 $4 $5 $6
 }
-
+see-surf(){
+python3 ~/tools/See-SURF/see-surf.py $1 $2 $3 $4 $5 $6
+}
+byp4xx(){
+python3 ~/tools/byp4xx/byp4xx.py $1 $2 $3 $4 $5 $6
+}
+fff(){
+~/go/bin/fff $1 $2 $3 $4 $5
+}
+gf(){
+~/go/bin/gf $1 $2 $3 $4 $5
+}
+oralyzer(){
+python3 ~/tools/Oralyzer/oralyzer.py $1 $2 $3 $4 $5
+}
 export PATH=$PATH:/go/bin
