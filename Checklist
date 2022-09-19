@@ -2,11 +2,12 @@ recon:
 ---- content discovery asn---------
 ####subnets/ip blocks#####
 1)shodan
-2)bgp.he.net
-3)whois.arin.net
-4)apps.db.ripe.net
-5)reverse.report
-6)dnsgoodies.com
+2)uncover
+3)bgp.he.net
+4)whois.arin.net
+5)apps.db.ripe.net
+6)reverse.report
+7)dnsgoodies.com
 
 take results run masscan to filter live ip/domains
 run nmap -sV to find outdated services
