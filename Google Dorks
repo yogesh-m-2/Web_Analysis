@@ -1,3 +1,4 @@
 1.site: ext:pdf “confidential”
 2.bucket-stream
 3.inurl:gov.s3.amazonaws.com
+site: /etc/certs + “index of /” */* site:
