@@ -1,9 +1,27 @@
+import mechanize
+from bs4 import BeautifulSoup
+import re
 import re
 import requests as r
 import sys 
 import getopt
 
 global k_
+
+def get_url(skey,page):
+    br = mechanize.Browser()
+    br.set_handle_robots(False)
+    br.set_handle_equiv(False)
+    br.addheaders = [('User-agent', 'Mozilla/5.0')] 
+    br.open('http://www.google.com/')   
+
+    # do the query
+    br.select_form(name='f')   
+    br.form['q'] = 'scrapy' # query
+    data = br.submit()
+    url=data.geturl()
+    return url.replace("scrapy",skey+"&start="+page)
+
 
 k_ = {
     's_key': None,
@@ -47,7 +65,7 @@ def main():
 		for i in range(k_['page_start'],k_['page_end']+1):
 			page=str((i-1)*10)
 			print(page)
-			url="""https://www.google.com/search?q="""+k_['s_key']+"""&hl=en&sxsrf=ALiCzsbt1g0F0ScjUkcJTW6tg17KX9hg_A:1656692975843&ei=7yC_YuCHM-SZseMPsreUoAY&start="""+page+"""&sa=N&ved=2ahUKEwigu86ijtj4AhXkTGwGHbIbBWQQ8tMDegQIGBA6&biw=2400&bih=1217&dpr=0.8"""
+			url=get_url(k_['s_key'],page)
 			res=r.get(url,headers=header)
 			res=str(res.text)
 			x = re.compile('href="/url\?q=https://([^\/]*)')
@@ -57,7 +75,7 @@ def main():
 	if(k_['pages']):
 		for i in range(1,k_['pages']+1):
 			page=str((i-1)*10)
-			url="""https://www.google.com/search?q="""+k_['s_key']+"""&hl=en&sxsrf=ALiCzsbt1g0F0ScjUkcJTW6tg17KX9hg_A:1656692975843&ei=7yC_YuCHM-SZseMPsreUoAY&start="""+page+"""&sa=N&ved=2ahUKEwigu86ijtj4AhXkTGwGHbIbBWQQ8tMDegQIGBA6&biw=2400&bih=1217&dpr=0.8"""
+			url=get_url(k_['s_key'],page)
 			res=r.get(url,headers=header)
 			res=str(res.text)
 			x = re.compile('href="/url\?q=https://([^\/]*)')
