@@ -138,7 +138,7 @@ paramspider -d unifytwin.com --subs false --placeholder '"/><script>confirm(1)</
 
 -) prototype pollution using objects
 
--)github exposing sensitive data - trufflehog etc
+-)github exposing sensitive data - trufflehog,gittools,aem-hacker
 -)Dos by setting long passwords
 -)email swapping - eg. send a mail to a victim which is signed by apple
 
