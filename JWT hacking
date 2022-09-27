@@ -1,0 +1,1 @@
+python3 jwt_tool.py 'jwt token' -C -d ~/SecLists/Passwords/darkc0de.txt
