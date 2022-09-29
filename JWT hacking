@@ -2,6 +2,10 @@ Bruteforce jwt secret - python3 jwt_tool.py 'jwt token' -C -d ~/SecLists/Passwor
 
 
 Checklist:
+1)When Payload is JWT remove the middle part of JWT, convert it to normal json.
+Remove some headers like Content Type etc.
+Eg.when unified jwt was cracked.
+
 1)Change algorithm to None -JSON Web Tokens in burp
 
 2)Change rs256 to Hs256  - Farah Hawah code using Public key
