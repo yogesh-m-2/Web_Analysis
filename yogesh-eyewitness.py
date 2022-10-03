@@ -71,7 +71,7 @@ def start_thread(page):
 
 def main():
 	global domain_lines,pages
-	domains=open("domains")
+	domains=open("subdomains")
 	domain_lines=domains.readlines()
 	length=len(domain_lines)
 	divided=int(length/10)
