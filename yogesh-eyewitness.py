@@ -54,7 +54,7 @@ def start_thread(page):
 	for j in range((page*10),((page+1)*10)):
 		try:
 			url=domain_lines[j].strip("\n")
-			res=r.get("http://"+url,headers=header,timeout=3)
+			res=r.get("http://"+url,headers=header,timeout=10)
 			file=open("eyewitness/"+str(j)+".html","w")
 			file.write(res.text)
 			content=content+"""
