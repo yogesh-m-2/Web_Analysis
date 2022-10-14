@@ -1,26 +1,27 @@
 import requests as r
 import threading
-# import os
+import sys
+import getopt
+import os  
 
-# efolder="eyewitness"
-# path = os.path.join(".", efolder)
-# os.mkdir(path)
+if(not os.path.exists("eyewitness/")):
+	os.mkdir(("eyewitness/"))
 
+
+global k_
+k_ = {
+    's_key': None,
+    'threads': 1
+}
+
+def help(_exit_=False):
+    print("Usage: %s [OPTION]\n" % sys.argv[0])
+    print("\t-s\tSubdomains File Name")
+    if _exit_:
+        sys.exit()
 
 header={"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko)"}
 
-# import requests 
-# from bs4 import BeautifulSoup
-  
-
-# web_url = "www.geeksforgeeks.org"
-# file1 = open("eyewitness/"+web_url+".html", "w")
-
-# html = requests.get("http://"+web_url).content
-# file1.write(str(html))
-# file1.close()
-
-# indexpage=open("eyewitness/index.html", "w")
 
 top="""<html>
 <head>
@@ -43,8 +44,6 @@ bottom="""
 </body>
 </head>
 </html>"""
-# indexpage.write(content)
-# indexpage.close()
 
 domain_lines=""
 pages = ""
@@ -69,63 +68,37 @@ def start_thread(page):
 	indexpage.write(top+content+pages+bottom)
 	indexpage.close()
 
-def main():
+def submain(file):
 	global domain_lines,pages
-	domains=open("subdomains")
+	domains=open(file)
 	domain_lines=domains.readlines()
 	length=len(domain_lines)
 	divided=int(length/10)
 	for j in range(0,divided):
 		pages=pages+"""<a href="index"""+str(j)+""".html">-"""+str(j)+"""</a>"""
 	for i in range(0,divided):
-		ti = threading.Thread(target=start_thread, args=(i,))
-		ti.start()
-	
+		sent="No"
+		while(sent=="No"):
+			if(threading.active_count()<10):
+				ti = threading.Thread(target=start_thread, args=(i,))
+				ti.start()
+				sent="Yes"
 
 
-
-		
-
+def main():
+	global k_
+	if len(sys.argv) < 2:
+		help(1)
+	try:
+		opts, args = getopt.getopt(sys.argv[1:],'s:l:p:o:t:T::u:kv',['s='])
+	except Exception as e:
+		print(e)
+	for o, a in opts:
+		if o == '-s':
+			k_['s_key'] = a
+		if o == '--help':
+			help(1)
+	submain(k_['s_key'])
 
 if __name__ == '__main__':
 	main()
-
-
-# soup = BeautifulSoup(html, "html.parser")
-  
-# js_files = []
-# cs_files = []
-  
-# for script in soup.find_all("script"):
-#     if script.attrs.get("src"):
-          
-#         # if the tag has the attribute 
-#         # 'src'
-#         url = script.attrs.get("src")
-#         js_files.append(url)
-  
-  
-# for css in soup.find_all("link"):
-#     if css.attrs.get("href"):
-          
-#         # if the link tag has the 'href' 
-#         # attribute
-#         _url = css.attrs.get("href")
-#         cs_files.append(_url)
-  
-# for i in js_files:
-# 	try:
-# 		route=""
-# 		string=str(i).split("/")
-# 		if(string[2]==web_url):
-# 			for j in string:
-# 				if(j!="https:" and j!=web_url and j!=""):
-# 					route=route+j+"/"
-# 					os.mkdir(route)
-# 			os.remove(route)
-
-
-# 	except:
-# 		continue
-	
-# print(f"Total {len(cs_files)} CSS files found")
